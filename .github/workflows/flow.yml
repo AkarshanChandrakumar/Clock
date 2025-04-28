@@ -32,6 +32,8 @@ jobs:
 
       - name: Stop, Remove, Build, and Run Docker Container
         run: |
+          docker ps
+          docker ps -a
           docker stop clock || exit 0
           docker rm clock || exit 0
           docker build -t clock .
