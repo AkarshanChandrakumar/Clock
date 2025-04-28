@@ -26,32 +26,14 @@ jobs:
     needs: sonar-build
     runs-on: [self-hosted, windows]
     steps:
-      - name: Set PowerShell Execution Policy
-        run: Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass
-        shell: powershell  
         
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Print Docker Version
-        run: docker version
-        shell: powershell
-
-      - name: Stop and Remove existing container (if any)
+      - name: Stop, Remove, Build, and Run Docker Container
         run: |
-          $container = docker ps -q -f "name=clock"
-          if ($container) {
-            docker stop $container
-            docker rm $container
-          } else {
-            Write-Host "No existing container"
-          }
-        shell: powershell
-
-      - name: Build and Run Docker Container
-        run: |
+          docker stop clock || exit 0
+          docker rm clock || exit 0
           docker build -t clock .
-          docker run -d --name clock clock
-        shell: powershell
-
-  
+          docker run -d -p 8090:80 --name clock clock
+        shell: cmd  
