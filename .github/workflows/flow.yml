@@ -13,16 +13,16 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Install SonarScanner
-        run: |
-          choco install sonarqube-scanner.portable
+      - name: SonarQube Scan (Windows)
         shell: cmd
-      - name: Stop and Remove existing container (if any)
         run: |
-          if (docker ps -q -f "name=myapp1") {
-            docker stop myapp1
-            docker rm myapp1
-          } else {
-            Write-Host "No existing container"
-          }
-        shell: powershell
+          sonar-scanner.bat ^
+            -Dsonar.projectKey=clock ^
+            -Dsonar.sources=. ^
+            -Dsonar.host.url=%SONAR_HOST_URL% ^
+            -Dsonar.login=%SONAR_TOKEN%
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+          SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
+
+  
