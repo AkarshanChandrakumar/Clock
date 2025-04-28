@@ -20,7 +20,7 @@ jobs:
         run: |
           sonar-scanner.bat ^
             -Dsonar.host.url=%SONAR_HOST_URL% ^
-            -Dsonar.token=%SONAR_TOKEN%
+            -Dsonar.login=%SONAR_TOKEN%
         shell: cmd
 
       - name: Stop and Remove existing container (if any)
