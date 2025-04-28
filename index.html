@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Analogue-Clock</title>
+ <style>
+    body{
+    margin:0;
+    padding:0;
+    background-color: palevioletred;
+    height: 100vh;
+    font-family: Arial, Helvetica, sans-serif;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+}
+img{
+    width:90px;
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%);
+    top: 60px;
+    z-index: 2;
+}
+.clock{
+    background-color: paleturquoise;
+    width: 350px;
+    height:350px;
+    position: relative;;
+    border-radius: 50%;
+    border:5px solid darkgrey;
+    box-shadow:1px 1px 4px rgb(0, 0,0,.7)
+}
+.numbers div{
+position:absolute;
+font-size:20px;
+color:rgb(10, 143, 143);
+font-weight: bold;
+text-shadow:1px 1px 2px rgb(0, 0,0,.7);
+}
+.twelve{
+    top:6px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+.three{
+    right:6px;
+    top:50%;
+    transform:translateY(-50%);
+}
+.six{
+    bottom:6px;
+    left:50%;
+    transform:translateX(-50%);
+}
+.nine{
+    left:6px;
+    top:50%;
+    transform: translateY(-50%);
+}
+.arrows{
+    display: flex;
+    width:100%;
+    height:100%;
+    justify-content:center;
+    align-items: center;
+}
+.arrows::before{
+    content:"";
+    width:25px;
+    height:25px;
+    background-color: black;
+    border-radius: 50%;
+    box-shadow: 1px 1px 2px rgbs(0,0,0,.7);
+    z-index:  4;
+}
+.arrows div{
+    background-color: azure;
+    width:7px;
+    position: absolute;
+    height: 120px;
+    transform-origin: bottom center;
+    bottom:50%;
+    z-index:3;
+    border-radius: 50% 50% 0 0;
+    box-shadow: 1px 1px 2px rgba(0,0,0,.7);
+    background-color: yellow;
+}
+.arrows .hour {
+    height:80px;
+    transform: rotate(30deg);
+    background-color: darkorange;
+}
+.arrows .seconds{
+    height: 120px;
+    transform: rotate(120deg);
+    background-color: blue;
+}
+
+ </style>
+</head>
+<body>
+    <div class="clock">
+       <div class="numbers">
+          <div class="twelve">12</div>
+          <div class="three">3</div>
+          <div class="six">6</div>
+          <div class="nine">9</div>
+       </div>
+       <div class="arrows">
+          <div class="hour"></div>
+           <div class="minute"></div>
+          <div class="seconds"></div>
+       </div>
+       <img src="svenfriday.jpg" alt="sevenfriday">
+    </div>
+    <h2 style="background-color: azure;text-align:center;">Analogue Clock</h2>
+    <script src="index.js"></script>
+</body>
+</html>
