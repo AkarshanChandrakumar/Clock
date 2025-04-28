@@ -27,7 +27,7 @@ jobs:
     runs-on: [self-hosted, windows]
     steps:
         
-      - name: Checkout code
+      - name: Checkout codes
         uses: actions/checkout@v4
 
       - name: Stop, Remove, Build, and Run Docker Container
