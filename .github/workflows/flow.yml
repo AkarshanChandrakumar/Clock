@@ -13,13 +13,10 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: SonarQube Scan
-        uses: SonarSource/sonarcloud-github-action@v2.1.0
-        with:
-          projectBaseDir: .
-        env:
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-          SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
+      - name: Install SonarScanner
+        run: |
+          choco install sonarscanner
+        shell: cmd
       - name: Stop and Remove existing container (if any)
         run: |
           if (docker ps -q -f "name=myapp1") {
