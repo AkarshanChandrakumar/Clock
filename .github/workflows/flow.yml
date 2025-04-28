@@ -6,7 +6,7 @@ on:
       - main
 
 jobs:
-  build:
+  sonar-build:
     runs-on: [self-hosted, windows]
 
     steps:
@@ -22,5 +22,22 @@ jobs:
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
           SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
-
+  deploy-to-docker:
+    needs: sonar-build
+    runs-on: [self-hosted, windows]
+    steps:
+      - name: Stop and Remove existing container (if any)
+        run: |
+          if (docker ps -q -f "name=clock") {
+            docker stop clock
+            docker rm clock
+           } else {
+            Write-Host "No existing container"
+           }
+        shell: powershell
+      - name: Build and Run Docker Container
+        run: |
+          docker build -t clock .
+          docker run -d --name clock clock
+        shell: powershell
   
