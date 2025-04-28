@@ -16,9 +16,7 @@ jobs:
       - name: SonarQube Scan (Windows)
         shell: cmd
         run: |
-          sonar-scanner.bat ^
-            -Dsonar.projectKey=clock ^
-            -Dsonar.sources=. ^
+          "C:\myapp\sonar-scanner-cli-7.1.0.4889-windows-x64\sonar-scanner-7.1.0.4889-windows-x64\bin\sonar-scanner.bat" ^
             -Dsonar.host.url=%SONAR_HOST_URL% ^
             -Dsonar.login=%SONAR_TOKEN%
         env:
