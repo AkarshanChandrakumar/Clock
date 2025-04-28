@@ -15,7 +15,7 @@ jobs:
 
       - name: Install SonarScanner
         run: |
-          choco install sonarscanner
+          choco install sonarqube-scanner.portable
         shell: cmd
       - name: Stop and Remove existing container (if any)
         run: |
