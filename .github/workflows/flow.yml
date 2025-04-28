@@ -26,6 +26,10 @@ jobs:
     needs: sonar-build
     runs-on: [self-hosted, windows]
     steps:
+      - name: Set PowerShell Execution Policy
+        run: Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass
+        shell: powershell  
+        
       - name: Checkout code
         uses: actions/checkout@v4
 
