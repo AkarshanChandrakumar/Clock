@@ -38,10 +38,10 @@ jobs:
           key: ${{ secrets.EC2_SSH_KEY }}
           port: 22
           script: |
-            cd /home/ubuntu/app-new/sonar-test-new
+            cd /home/ubuntu/clock/Clock
             sudo git pull origin main
             
-            sudo docker stop myapp1 || true
-            sudo docker rm myapp1 || true
-            sudo docker build -t myapp1 .
-            sudo docker run -d -p 8090:80 --name myapp1 myapp1 
+            sudo docker stop clock || true
+            sudo docker rm clock || true
+            sudo docker build -t clock .
+            sudo docker run -d -p 7090:80 --name clock clock 
