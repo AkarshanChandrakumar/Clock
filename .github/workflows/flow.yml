@@ -30,7 +30,7 @@ jobs:
       - name: Checkout codes
         uses: actions/checkout@v4
 
-      - name: Stop, Remove, Build, and Run Docker Container
+      - name: Stop, Remove, Build, and Run Docker Containers
         run: |
           docker ps
           docker ps -a
