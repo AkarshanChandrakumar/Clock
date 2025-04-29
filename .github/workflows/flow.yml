@@ -22,21 +22,27 @@ jobs:
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
           SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
+
   deploy-to-ec2:
-    needs: build  
+    needs: sonar-build
     runs-on: ubuntu-latest
 
     steps:
-        
-      - name: Checkout codes
-        uses: actions/checkout@v4
+      - name: Checkout code
+        uses: actions/checkout@v2
 
-      - name: Stop, Remove, Build, and Run Docker Container
-        run: |
-          docker ps
-          docker ps -a
-          docker stop clock || exit 0
-          docker rm clock || exit 0
-          docker build -t clock .
-          docker run -d -p 7070:80 --name clock clock
-        shell: cmd  
+      - name: SSH to EC2 and Deploy Docker
+        uses: appleboy/ssh-action@v0.1.10
+        with:
+          host: ${{ secrets.EC2_PUBLIC_IP }}
+          username: ubuntu
+          key: ${{ secrets.EC2_SSH_KEY }}
+          port: 22
+          script: |
+            cd /home/ubuntu/clock/Clock
+            sudo git pull origin main
+
+            sudo docker stop clock || true
+            sudo docker rm clock || true
+            sudo docker build -t clock .
+            sudo docker run -d -p 7090:80 --name clock clock
