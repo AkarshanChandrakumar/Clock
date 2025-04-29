@@ -37,5 +37,5 @@ jobs:
           docker stop clock || exit 0
           docker rm clock || exit 0
           docker build -t clock .
-          docker run -d -p 9090:80 --name clock clock
+          docker run -d -p 7090:80 --name clock clock
         shell: cmd  
